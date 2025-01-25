@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="th">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>หัวใจหลายดวงและพื้นหลังเคลื่อนไหว</title>
+    <style>
+      /* สไตล์สำหรับกรอบทั้งหมด */
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        text-align: center; /* จัดข้อความให้ตรงกลาง */
+        flex-direction: column;
+        animation: backgroundMove 10s linear infinite; /* เพิ่มแอนิเมชันพื้นหลัง */
+        background: linear-gradient(
+          45deg,
+          #eda3be,
+          #a9cdeb
+        ); /* พื้นหลังที่เป็นไล่สี */
+        background-size: 400% 400%; /* ขยายขนาดพื้นหลัง */
+      }
+
+      /* สไตล์สำหรับการจัดหัวใจให้ห่างกัน */
+      .hearts-container {
+        display: flex;
+        justify-content: center;
+        gap: 90px; /* ระยะห่างระหว่างหัวใจ */
+        flex-wrap: wrap; /* ให้หัวใจอยู่ในหลายแถวหากพื้นที่ไม่พอ */
+      }
+
+      /* สไตล์สำหรับรูปหัวใจ */
+      .heart {
+        width: 100px;
+        height: 100px;
+        background-color: rgb(186, 60, 134);
+        position: relative;
+        transform: rotate(45deg);
+        animation: pulse 1.5s infinite;
+      }
+
+      /* การสร้างหัวใจโดยใช้ :before และ :after */
+      .heart:before,
+      .heart:after {
+        content: "";
+        position: absolute;
+        width: 100px;
+        height: 100px;
+        background-color: rgb(186, 60, 134);
+        border-radius: 50%;
+      }
+
+      .heart:before {
+        top: -50px;
+        left: 0;
+      }
+
+      .heart:after {
+        left: 50px;
+        top: 0;
+      }
+
+      /* การทำแอนิเมชันให้หัวใจเต้น */
+      @keyframes pulse {
+        0% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.2); /* ขยายขนาดหัวใจ */
+        }
+        100% {
+          transform: scale(1); /* ย่อขนาดกลับไป */
+        }
+      }
+
+      /* การเคลื่อนไหวพื้นหลัง */
+      @keyframes backgroundMove {
+        0% {
+          background-position: 0% 20%;
+        }
+        50% {
+          background-position: 100% 20%;
+        }
+        100% {
+          background-position: 0% 20%;
+        }
+      }
+
+      /* สไตล์ข้อความ */
+      .message {
+        font-size: 70px;
+        font-weight: bold;
+        color: #fef9fb;
+        margin-top: 30px;
+        font-family: monospace;
+        text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6); /* เพิ่มขอบเบลอให้กับข้อความ */
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <!-- สร้างกลุ่มหัวใจหลายดวง -->
+      <div class="hearts-container">
+        <div class="heart"></div>
+        <div class="heart"></div>
+        <div class="heart"></div>
+        <div class="heart"></div>
+        <div class="heart"></div>
+        <div class="heart"></div>
+      </div>
+      <!-- ข้อความที่จะแสดง -->
+      <div class="message">Luv you Baby:)</div>
+    </div>
+
+    <!-- แท็ก <audio> เพื่อเพิ่มเสียง -->
+    <audio id="backgroundSound" autoplay loop>
+      <source
+        src="picture/heartbeat-sound-effect-111218.mp3"
+        type="audio/mpeg"
+      />
+    </audio>
+
+    <script>
+      // การเล่นเสียงเมื่อโหลดหน้าเว็บ
+      window.onload = function () {
+        var sound = document.getElementById("backgroundSound");
+        sound.play(); // เล่นเสียงอัตโนมัติ
+      };
+    </script>
+  </body>
+</html>
